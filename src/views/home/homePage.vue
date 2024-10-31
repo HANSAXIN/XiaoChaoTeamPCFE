@@ -1,6 +1,17 @@
 <template>
-  <div class=''>
-    <router-view></router-view>
+  <div class='' style="color: black;">
+    <!-- 轮播图 -->
+    <div></div>
+    <!-- 核心 -->
+    <div></div>
+    <!-- 商务合作 -->
+    <div></div>
+    <!-- 企业咨询 -->
+    <div></div>
+    <!-- 企业咨询 -->
+    <div></div>
+    <!-- 关于我们 -->
+    <div></div>
   </div>
 </template>
 

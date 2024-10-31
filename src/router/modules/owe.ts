@@ -5,29 +5,25 @@ const routes = [
   //   component: () => import("@/pages/login.vue"), //路由懒加载
   // },
   {
-    path: "/home",
+    path: "/",
     name: "home",
-    component: () => import("@/views/homePage.vue"),
-
+    component: () => import("@/views/home/home.vue"),
+    redirect: '/home/homePage',
     children: [
       {
-        path: "/home/user",
+        path: "/home/homePage",
         name: "homeUser",
-        component: () => import("@/views/user.vue"),
+        component: () => import("@/views/home/homePage.vue"),
       },
-      {
-        path: "/home/manage",
-        name: "homeManage",
-        component: () => import("@/views/manage.vue"),
-      },
+
     ],
   },
   //添加（放在最后）
-  {
-    path: "/:pathMatch(.*)*",
-    name: "pathMatch",
-    component: () => import("@/views/notFound.vue"),
-  },
+  // {
+  //   path: "/:pathMatch(.*)*",
+  //   name: "pathMatch",
+  //   component: () => import("@/views/notFound.vue"),
+  // },
 ];
 
 export default routes;
