@@ -4,13 +4,14 @@
 
 
       <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" :ellipsis="false"
-        @select="handleSelect">
+        @select="handleSelect" router>
+        
         <el-menu-item index="0">
           <!-- <img style="width: 100px" src="/images/element-plus-logo.svg" alt="Element logo" /> -->
           潮晟文化有限公司
         </el-menu-item>
         <div class="flex-grow" />
-        <el-menu-item index="1">{{ props.title }}</el-menu-item>
+        <el-menu-item index="/home/homePage" >{{ props.title }}</el-menu-item>
         <el-sub-menu index="2">
           <template #title>Workspace</template>
           <el-menu-item index="2-1">item one</el-menu-item>
@@ -35,14 +36,20 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
+import { useRoute } from 'vue-router';
 const props = defineProps({
   title: {
     type: String,
     default: '213312312'
   }
 })
-const activeIndex = ref('1')
+const route = useRoute()
+const activeIndex = computed(() => {
+  console.log(route.path)
+  return route.path
+})
+// const activeIndex = ref('2')
 const handleSelect = (key: string, keyPath: string[]) => {
   console.log(key, keyPath)
 }

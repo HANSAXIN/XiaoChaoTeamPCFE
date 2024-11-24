@@ -2,22 +2,21 @@
   <div class="common-layout">
     <el-container class="el-container">
       <el-header>
-        <pageTopNavigation :title="textData.title"></pageTopNavigation>
+        <pageTopNavigation></pageTopNavigation>
       </el-header>
       <el-main>
         <router-view></router-view>
       </el-main>
-      <el-footer>222</el-footer>
+      <el-footer>{{a}}</el-footer>
     </el-container>
   </div>
 </template>
 
 <script lang="ts" setup>
-import pageTopNavigation from "@/components/page/pageTop/pageNavigation.vue"
-import { ref, reactive } from 'vue';
-const textData = reactive({
-  title: '首页'
-})
+import pageTopNavigation from "@/components/navigation/pageNavigation.vue"
+import { ref } from 'vue';
+const a = ref('1')
+
 </script>
 <style lang="scss" scoped>
 .el-container {
