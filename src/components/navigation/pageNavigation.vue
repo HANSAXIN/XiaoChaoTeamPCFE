@@ -1,46 +1,31 @@
 <template>
-  <div>
-    <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" :ellipsis="false"
-      @select="handleSelect" router>
+  <div class="page-navigation">
+    <div class="page-navigation-left">
+      <img style="width: 100px" src="@/assets/images/test1.jpg" alt="潮晟文化有限公司" />
+      <div class="page-navigation-left-menu">
+        <div class="page-navigation-left-menu-item cursor-pointer" v-for="(item, index) in menuList" :key="index"
+          @click="jumpRouter(item, index)" :class="{ 'is-active': activeIndex === index }">
+          <div>
+            {{ item.name }}
+          </div>
+        </div>
 
-      <el-menu-item index="0">
-        <!-- <img style="width: 100px" src="/images/element-plus-logo.svg" alt="Element logo" /> -->
-        潮晟文化有限公司
-      </el-menu-item>
-      <div class="flex-grow" />
-      <navigationMenu :menuList="menuList"></navigationMenu>
-      <!-- <el-menu-item index="/home/homePage" >{{ props.title }}</el-menu-item>
-        <el-sub-menu index="2">
-          <template #title>Workspace</template>
-<el-menu-item index="2-1">item one</el-menu-item>
-<el-menu-item index="2-2">item two</el-menu-item>
-<el-menu-item index="2-3">item three</el-menu-item>
-<el-sub-menu index="2-4">
-  <template #title>item four</template>
-  <el-menu-item index="2-4-1">item one</el-menu-item>
-  <el-menu-item index="2-4-2">item two</el-menu-item>
-  <el-menu-item index="2-4-3">item three</el-menu-item>
-</el-sub-menu>
-</el-sub-menu> -->
-      <div class="flex-grow" />
-      <el-menu-item index="/loginAndRegister/loginAndRegister">
-        <!-- <img style="width: 100px" src="/images/element-plus-logo.svg" alt="Element logo" /> -->
-        登录/注册
-      </el-menu-item>
-    </el-menu>
+      </div>
+    </div>
+
+    <div class="page-navigation-right">
+      <div class="login-register">登录/注册</div>
+      <div></div>
+    </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import navigationMenu from '@/components/navigation/navigationMenu.vue'
-import { computed, reactive } from 'vue'
-import { useRoute } from 'vue-router';
+import { ref, reactive } from 'vue'
+import { useRouter } from 'vue-router';
 
-const route = useRoute()
-const activeIndex = computed(() => {
-  console.log(route.path)
-  return route.path
-})
+const router = useRouter()
+const activeIndex = ref(0)
 export interface MenuList {
   name: string;
   url: string;
@@ -145,14 +130,57 @@ let menuList = reactive<MenuList[]>([
   }
 ])
 // const activeIndex = ref('2')
-const handleSelect = (key: string, keyPath: string[]) => {
-  console.log(key, keyPath)
+
+const jumpRouter = (itemp: Object, indexp: number) => {
+  activeIndex.value = indexp
+  router.push({
+    path: (itemp as { url: string }).url,
+  })
 }
 
 
 </script>
 <style lang='scss' scoped>
-.flex-grow {
-  flex-grow: 1;
+.page-navigation {
+  width: calc(100% - 30px);
+  height: 60px;
+  padding: 0 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+
+  .page-navigation-left {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+
+    .page-navigation-left-menu {
+      display: flex;
+      height: 100%;
+    }
+
+    .page-navigation-left-menu-item {
+      display: flex;
+      width: 100px;
+      justify-content: center;
+      align-items: center;
+
+    }
+  }
+
+  .page-navigation-right {
+    .login-register {
+      background-color: #ea8435;
+      padding: 5px 10px;
+      border-radius: 20px;
+    }
+  }
+}
+
+.is-active {
+  color: #ea8435;
+  // border-bottom: 1px solid #ea8435;
 }
 </style>
